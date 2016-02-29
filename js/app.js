@@ -14,4 +14,6 @@ $(function() {
 
 	var prepareDishView = new PrepareDishView($("#prepareDishView"),model);
 	var dinnerOverviewView = new DinnerOverviewView($('#dinnerOverviewView'), model);
+
+	model.getAllDishes("appetizer");
 });

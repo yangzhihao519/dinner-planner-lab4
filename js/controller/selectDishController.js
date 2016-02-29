@@ -3,19 +3,25 @@ var SelectDishController = function (view, model) {
     setSelectedDishId(model);
 
 	$("#typeSelector").change(function() {
-	    view.update("selectType");
+		getAllDishes(model);
 	    setSelectedDishId(model);
 	});
 
 	view.searchButton.click(function(){
-	    view.update("searchDish");
+		getAllDishes(model);
 	    setSelectedDishId(model);
 	});
 }
 
+function getAllDishes(model){
+	var type =  $('#typeSelector :selected').val();
+	var filter = $('#searchInput').val();
+    model.getAllDishes(type, filter);
+}
+
 function setSelectedDishId(model){
 	$(".displayedDish").click(function(){
-			var id = $(this).attr('id');
-			model.setSelectedDishId(id);
+		var id = $(this).attr('id');
+		model.setSelectedDishId(id);
 	});
 }

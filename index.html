@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dinner planner</title>
+
+    <script src="js/jquery.1.11.1.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="headersection col-md-12">
+				<h1>HOMELETTE <small style="color: darkgoldenrod;">  From the best chefs in the world directly into your kitchen</small></h1> 
+			</div>
+			<div id="loadingDiv">
+				<div id="landing" class="landingimage">
+					<div class="header1 col-md-12">
+						<h1>HOMELETTE <small style="color: darkgoldenrod;">  From the best chefs in the world directly into your kitchen</small></h1> 
+					</div>
+					<div id="landingDiv">
+						<div class="textBox">
+							<h3>A Home Dinner Service</h3>
+							<hr/>
+							<p>some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here</p>
+							<br/><br/>
+							<p>start quickly</p>
+							<button type="button" class="btn btn-primary btn-md" onclick="DinnerMenu()"> Create new dinner</button>
+						</div>
+					</div>
+				</div>  
+			</div>  <!-- end of loading div -->
+			
+			
+	<!-- ****************************************** VIEW 1 *************************************************************************** -->		
+			
+			
+			
+	<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 1  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->	
+
+	
+	<!-- ****************************************** VIEW 2 *************************************************************************** -->		
+			<div id="view234">
+				<div class="col-md-3 col-sm-4" id="myDinnerView" style="display: none;">
+					<p class="lead">My Dinner</p>    
+					<div class="col-md-12 col-sm-12 col-xs-5" id="guestNumberView">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<span class="col-md-5">Number of People:</span>
+								<span class="col-md-7">
+									<span class="col-md-8">
+										<!-- <input type="number" style="width:50px" id="numberOfGuests" min="0" max="100"></input> -->
+										<span id="numberOfGuests"></span>
+									</span>
+									<div class="pull-right">
+											<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+											<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+									</div>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-7">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<table class="table">
+								<thead>
+									<tr>
+									  <th>Dish Name</th>
+									  <th>Cost</th>
+									</tr>
+								</thead>
+								<tbody id="myMenu">
+									<tr>
+									  <td>Pending</td>
+									  <td>0.00</td>
+									</tr>
+									<tr>
+									  <td>Total</td>
+									  <td></td>
+									</tr>
+								</tbody>
+								</table>		  
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 parapadding1">
+						<div class="btn-group">
+							<button class="btn btn-default" type="button" onclick="confirmDinner()">
+								Confirm Dinner
+							</button>
+						</div>
+					</div>
+				</div>
+                <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 2 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+
+                <!-- ********************************************************** VIEW 3 ***************************************************************************** -->
+				<div class="col-md-9 col-sm-8" style="border-left: 2px solid #999; display: none;" id="selectDishView">
+					<div class="panel panel-default" style="background-color: lightgray;">
+						<div class="panel-body">
+							<div class="col-md-12">
+								<p>Select Dish</p>
+								<div class="col-md-12">
+									<div class="col-md-3">
+										<select class="selectpicker btn btn-default" id="typeSelector">
+										    <option value="starter" selected="selected">Starter</option>
+										    <option value="main dish">Main Dish</option>
+										    <option value="dessert">Dessert</option>
+										</select>
+									</div>
+									<div class="col-md-3">
+										<div class="input-group">
+											<input type="text" class="form-control" id="searchInput" placeholder="Search for...">
+											<span class="input-group-btn">
+											<button class="btn btn-default" type="button" id="searchButton">Search</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<h1> Dishes to be selected</h1>
+								<div>
+									<br/>
+									<div id="allDishes"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	            <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 3 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+
+		        <!-- *********************************************************** VIEW 4 ***************************************************************************** -->
+				<div class="col-md-9 col-sm-8" style="border-left: 2px solid #999; display: none;" id="oneDishView">	
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12 parapadding1">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<div class="col-xs-12"><h2 id="oneDishName"></h2></div>
+									<div class="col-xs-12" id="oneDishImage"></div>
+									<div class="col-xs-12" id="oneDishDescription"></div>
+								</div>
+							</div>
+							<button type="button" class="btn btn-primary" onclick="selectDish()">Back to select dish</button>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-sm-6 col-xs-12 parapadding" style="background-color: rgb(254,228,157);">
+						<div>
+							<h3>Ingredients for <span id="oneDishNumberOfGuests"></span> people</h3>
+						</div>
+						<hr/>
+						<div id="oneDishAllIngredients">
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<hr/>
+							<div class="col-md-4 col-sm-4 col-xs-4">
+								<button type="button" class="btn btn-default" id="confirmDishButton" onclick="selectDish()">Confirm dish</button>
+							</div>
+							<div class="col-md-1 col-md-offset-5 col-sm-1 col-sm-offset-4 col-xs-1 col-xs-offset-4">
+								<b>SEK </b>
+							</div>
+							<div class="col-md-1 col-sm-1 col-xs-1">
+								<b><p id="oneDishTotalPrice"></p></b>
+							</div>
+						</div>
+					</div>
+				</div> 
+	            <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 4 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+			</div>  <!-- end of view2,view3 and view4 div -->
+			
+
+<!-- *********************************************************** VIEW 5 ***************************************************************************** -->
+			<div id="dinnerOverviewView" style="display: none;">
+				<div class="col-md-12" style="padding-top: 1%; background-color: lightgray;">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="col-md-4 col-sm-4 col-xs-7">
+								<p class="lead">Dinner: <span id="dinnerOverviewViewNumberOfGuests"></span><span> People</span></p>
+							</div>
+							<div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-5">
+								<button type="button" class="btn btn-primary" onclick="selectDish()">Edit Dinner</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<br/>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="col-md-12" id="displayMyDishes" style="text-align: center">
+							</div>
+						</div>
+					</div>
+				</div>
+					
+				<div class="col-md-12">
+					<div class="col-md-2 col-md-offset-8 col-sm-2 col-sm-offset-7 col-xs-5 col-xs-offset-1">
+						<b>Total: <span id="dinnerOverviewViewTotalPrice"></span> SEK </b>
+					</div>
+					<div class="col-md-2 col-sm-2 col-xs-4">
+						<button type="button" class="btn btn-success" onclick="fullRecipe()">Print Full Recipe</button>
+					</div>
+				</div>
+			</div>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 5 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+
+
+
+<!-- *********************************************************** VIEW 6 ***************************************************************************** -->
+			<div id="prepareDishView" style="display: none;">
+				<div class="col-md-12" style="padding-top: 1%; background-color: lightgray;">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="col-md-4 col-sm-4 col-xs-7">
+								<p class="lead">My Dinner: <span id="numberOfPeople"></span><span> People</span></p>
+							</div>
+							<div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-5">
+								<button type="button" class="btn btn-primary pull-right" onclick="selectDish()">Edit Dinner</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div>
+							<div id="prepareDish">
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> 
+			
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+		    
+		</div>  <!-- end of row -->
+	</div>	<!-- end of container -->
+	
+	<script>
+		function DinnerMenu()    // view1 to view2+3
+		{
+			$('#landing').hide();
+			$('#myDinnerView').show();
+			$('#selectDishView').show();
+		}
+		
+		function selectedDishDetails()   // view2+3 to view4
+		{
+			$('#selectDishView').hide();
+			$('#oneDishView').show();
+		}
+
+		function selectDish()    // view 4 to view 2+3
+		{
+			$('#oneDishView').hide();
+			$('#dinnerOverviewView').hide();
+			$('#prepareDishView').hide();
+			$('#myDinnerView').show();
+			$('#selectDishView').show();	
+		}
+
+		function confirmDinner()   // view2+3/4 to view5
+		{
+			$('#myDinnerView').hide();
+			$('#selectDishView').hide();
+			$('#oneDishView').hide();
+			$('#dinnerOverviewView').show();
+		}
+		
+		function fullRecipe()    // view5 to view6
+		{
+			$('#dinnerOverviewView').hide();
+			$('#prepareDishView').show();
+		}			
+	</script>
+
+    <!-- jQuery -->
+   <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> -->
+
+	<!-- The application JavaScript code -->
+	<script src="js/app.js"></script>
+	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/myDinnerView.js"></script>
+	<script src="js/view/selectDishView.js"></script>
+    <script src="js/view/oneDishView.js"></script>
+    <script src="js/view/prepareDishView.js"></script>
+	<script src="js/view/dinnerOverviewView.js"></script>
+	<script src="js/controller/myDinnerController.js"></script>	
+	<script src="js/controller/myDinnerController.js"></script>
+	<script src="js/controller/selectDishController.js"></script>
+	<script src="js/controller/oneDishController.js"></script>
+  </body>
+</html>

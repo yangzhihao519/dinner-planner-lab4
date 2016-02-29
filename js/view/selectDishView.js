@@ -7,7 +7,7 @@ var SelectDishView = function (container, model) {
 	this.searchInput = container.find("#searchInput");
 	this.searchButton = container.find("#searchButton");
 
-	var allDishes = model.getAllDishes("starter");
+	var allDishes = model.getAllDishes("appetizer");
 	var allDishesHtml = "";
 
 	for (i = 0; i < allDishes.length; i++) { 

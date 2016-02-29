@@ -1,6 +1,5 @@
 //SelectDishView Object constructor
 var DinnerOverviewView = function (container, model) {
-
 	model.attach(this);
 
 	// Get all the relevant elements of the view (ones that show data

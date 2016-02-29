@@ -20,8 +20,10 @@ function getAllDishes(model){
 }
 
 function setSelectedDishId(model){
+	console.log("function setSelectedDishId(model)");
 	$(".displayedDish").click(function(){
 		var id = $(this).attr('id');
+		console.log(".displayedDish.click");
 		model.setSelectedDishId(id);
 	});
 }

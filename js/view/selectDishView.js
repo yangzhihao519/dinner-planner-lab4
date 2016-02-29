@@ -10,9 +10,8 @@ var SelectDishView = function (container, model) {
 	this.searchButton = container.find("#searchButton");
 
 	this.update = function(args){
-		var allDishesHtml = "";
-
 		if (args["type"] === "selectDish") {
+			var allDishesHtml = "";
 			var allDishes = args["content"];
 
 			for (key in allDishes) { 
@@ -31,12 +30,12 @@ var SelectDishView = function (container, model) {
 												        "<p class=\"parapadding\">"+ allDishes[key].Category+"</p>"+
 											"</div>"+
 										"</div>";
+
+				$("#allDishes").html(allDishesHtml);
 		    }
 		}
 		else{
 			// do nothing
 		}
-	    
-	    $("#allDishes").html(allDishesHtml);
 	}
 }

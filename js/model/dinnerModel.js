@@ -4,20 +4,21 @@ var DinnerModel = function() {
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
 	var numberOfGuests = 1;
-	var menu = [];
+	/// var menu = [];
+	var dishesInMenu = [];
 	var dishes = [];
 	var selectedDishId = "";
 
 	this._observers = [];
 
 	this.attach = function(observer){
-		console.log("DinnerModel: this.attach");
+		// console.log("DinnerModel: this.attach");
 		this._observers.push(observer);
 	}
 
 
 	this.notify = function(args){
-		console.log("DinnerModel: this.notify");
+		// console.log("DinnerModel: this.notify");
 		for(key in this._observers){
 			this._observers[key].update(args);
 		}
@@ -25,8 +26,7 @@ var DinnerModel = function() {
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
-		console.log("set~ "+ num);
-		if(num<0){
+		if(num < 0){
 			numberOfGuests = 0;
 		}
 		else{
@@ -45,8 +45,8 @@ var DinnerModel = function() {
 
     
     this.setSelectedDishId = function(id){
+    	console.log("this.setSelectedDishId");
     	selectedDishId = id;
-
     	this.notify("selectedDishId");
     }
 
@@ -74,12 +74,13 @@ var DinnerModel = function() {
 	//Returns all the dishes on the my menu.
 	this.getFullMenu = function() {
 		//TODO Lab 2
-		var allDishes = [];
+		// var allDishes = [];
 
-		for(key in menu){
-			allDishes.push(this.getDish(menu[key]));
-		}
-		return allDishes;
+		// for(key in menu){
+		// 	allDishes.push(this.getDish(menu[key]));
+		// }
+
+		return dishesInMenu;
 	}
 
 	//Returns all ingredients for all the dishes on the menu.
@@ -87,25 +88,60 @@ var DinnerModel = function() {
 		//TODO Lab 2
 		var allIngredients = [];
 
-		for(key in menu){
-			var dish = this.getDish(menu[key]);
-			var ingredients = dish.ingredients;
+		for(key in dishesInMenu){
+			//var dish = this.getDish(menu[key]);
+			var dish = dishesInMenu[key];
 
-			for(ingredient in ingredients){
-				allIngredients.push(ingredient);
+			if(dish.hasOwnProperty('Ingredients')){
+				var ingredients = dish.Ingredients;
+
+				for(ingredient in ingredients){
+					allIngredients.push(ingredient);
+				}
 			}
+			else{
+				// do nothing..
+			}
+
 		}
+
 		return allIngredients;
+	}
+
+	//function that returns total price of one dish of specific ID
+	// Since BigOven does not have the price for the ingredients, 
+	// we will "pretend" that the price of each ingredient is 1 SEK per unit. 
+	// That means if you need 1 egg and 10 ml of oil, the total price will be 1x1 + 1x10 = 11. 
+	this.getDishTotalPrice = function (dish) {
+		//console.log("getDishTotalPrice id: "+id);
+		var dishTotalPrice = 100;
+
+		//var dish = this.getDish(id);
+		console.log("dish: "+dish);
+
+		if(dish.hasOwnProperty('Ingredients')){
+			var allIngredients = dish.Ingredients;
+			
+			for(key in allIngredients){
+				dishTotalPrice += allIngredients[key].Quantity * 1;
+			}
+		}else{
+			// do nothing
+		}
+
+		return dishTotalPrice;
 	}
 
 	//Returns the total price of my menu (all the ingredients multiplied by number of guests).
 	this.getTotalMenuPrice = function() {
 		//TODO Lab 2
 		var totalMenuPrice = 0;
+		console.log("this.getTotalMenuPrice menu: "+ dishesInMenu);
 
-		for(key in menu){
-			var dishId = menu[key];
-			var thisDishPrice = this.getDishTotalPrice(dishId);
+		for(key in dishesInMenu){
+			var dish = dishesInMenu[key];
+			console.log("getTotalMenuPrice id: "+dish);
+			var thisDishPrice = this.getDishTotalPrice(dish);
 			totalMenuPrice += thisDishPrice;
 		}
 
@@ -117,7 +153,7 @@ var DinnerModel = function() {
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
-		menu.push(id);
+		dishesInMenu.push(this.getDish(id));
 
 		this.notify("menu");
 	}
@@ -125,11 +161,11 @@ var DinnerModel = function() {
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
 		//TODO Lab 2
-		for (key in menu){
-			var dishId = menu[key];
+		for (key in dishesInMenu){
+			var dish = dishesInMenu[key];
 
-			if(dishId == id){
-				menu.splice(key, 1);
+			if(dish.RecipeID == id){
+				dishesInMenu.splice(key, 1);
 				break;
 			}
 			else{
@@ -153,19 +189,27 @@ var DinnerModel = function() {
 													"&title_kw=" + titleKeyWord +
 													"&pg=1&rpp=20"
 		console.log("url: "+url);
+
+		var self = this;
 		$.ajax({
 		        type: "GET",
 		        dataType: 'json',
 		        cache: false,
 		        url: url,
-		        context: this,
 		        success: function (data) {
 		            dishes = data["Results"];
 		            console.log(dishes);
 
 		            var args = {type:"selectDish", content:dishes};
  					console.log(args);
-		            this.notify(args);
+		            self.notify(args);
+
+	            	$(".displayedDish").click(function(){
+	            		console.log("displayedDish click");
+						var id = $(this).attr('id');
+						console.log(".displayedDish.click id: "+id);
+						self.setSelectedDishId(id);
+					});
 		        }
 		});
 
@@ -196,18 +240,6 @@ var DinnerModel = function() {
 		}
 	}
 
-	//function that returns total price of one dish of specific ID
-	this.getDishTotalPrice = function (id) {
-		var dish = this.getDish(id);
-		var allIngredients = dish.ingredients;
-		var dishTotalPrice = 0;
-
-		for(key in allIngredients){
-			dishTotalPrice += allIngredients[key].price;
-		}
-
-		return dishTotalPrice;
-	}
 
 	// the dishes variable contains an array of all the 
 	// dishes in the database. each dish has id, name, type,

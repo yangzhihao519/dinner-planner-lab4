@@ -42,7 +42,7 @@
 }
 
 .parapadding{
-	padding-bottom: 2%;
+	padding-bottom: 20px;
 }
 
 .parapadding1{
@@ -51,5 +51,10 @@
 }
 
 .imageheight{
-	min-height: 150px;
+	/*min-height: 200px;*/
+	max-height: 150px;
+}
+
+.displayedDish{
+	height: 230px;
 }

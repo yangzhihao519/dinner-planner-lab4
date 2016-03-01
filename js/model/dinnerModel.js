@@ -181,7 +181,7 @@ var DinnerModel = function() {
 	this.getAllDishes = function (type, filter) {
 		var recipeID = 196149;
 
-	    var apiKey = "8vtk7KykflO5IzB96kb0mpot0sU40096";
+	    var apiKey = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
 		var anyKeyWord = type;
 		var titleKeyWord = filter
 		var url = "http://api.bigoven.com/recipes"+ "?api_key=" + apiKey + 

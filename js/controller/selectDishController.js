@@ -11,6 +11,13 @@ var SelectDishController = function (view, model) {
 		getAllDishes(model);
 	    setSelectedDishId(model);
 	});
+
+	// $('#allDishes').on('click', '.displayedDish', function (event) {
+	// 	console.log("displayedDish click");
+	//     var id = $('.displayedDish').attr("id");
+	//     console.log(".displayedDish.click id: "+id);
+	// 	model.setSelectedDishId(id);
+	// });
 }
 
 function getAllDishes(model){

@@ -26,8 +26,8 @@ var DinnerModel = function() {
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
-		if(num < 0){
-			numberOfGuests = 0;
+		if(num < 1){
+			numberOfGuests = 1;
 		}
 		else{
 			numberOfGuests = num;
@@ -114,7 +114,8 @@ var DinnerModel = function() {
 	// That means if you need 1 egg and 10 ml of oil, the total price will be 1x1 + 1x10 = 11. 
 	this.getDishTotalPrice = function (dish) {
 		//console.log("getDishTotalPrice id: "+id);
-		var dishTotalPrice = 100;
+		// due to the ingredients are lost in bigoven, we set the default price as 100 per dish
+		var dishTotalPrice = 100 * numberOfGuests; 
 
 		//var dish = this.getDish(id);
 		console.log("dish: "+dish);
@@ -123,7 +124,7 @@ var DinnerModel = function() {
 			var allIngredients = dish.Ingredients;
 			
 			for(key in allIngredients){
-				dishTotalPrice += allIngredients[key].Quantity * 1;
+				dishTotalPrice += allIngredients[key].Quantity * 1 * numberOfGuests;
 			}
 		}else{
 			// do nothing

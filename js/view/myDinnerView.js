@@ -11,10 +11,8 @@ var MyDinnerView = function(container, model){
 	this.numberOfGuests.html(model.getNumberOfGuests);
 
 	this.update = function(args){
-		if (args == "numberOfGuests") {
+		if (args == "numberOfGuests" || args == "menu") {
 			this.numberOfGuests.html(model.getNumberOfGuests);
-
-		}else if(args == "menu"){
 			var dishesInFullMenu = model.getFullMenu();
 			console.log("dishesInFullMenu: "+dishesInFullMenu);
 			var myMenuHtml = "";

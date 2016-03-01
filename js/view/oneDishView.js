@@ -18,43 +18,50 @@ var OneDishView = function (container, model) {
 	this.update = function(args){
 		if (args == "numberOfGuests" || args == "selectedDishId") {
 			this.oneDishNumberOfGuests.html(model.getNumberOfGuests);
+
 			var oneDishId = model.getSelectedDishId();
-			console.log("oneDishId: "+oneDishId);
-			var oneDish = model.getDish(oneDishId);
-			console.log("oneDish: "+oneDish);
-
-			this.oneDishName.html(oneDish.Title);
-			this.oneDishImage.html("<a class=\"thumbnail\">"+"<img class=\"img-responsive center-block imageheight\" src='"+oneDish.ImageURL+"'></a>");
-			this.oneDishDescription.html(oneDish.Description);
 			
-			this.oneDishTotalPrice.html(model.getDishTotalPrice(oneDishId));
+			if(!oneDishId || 0 === oneDishId.length){
+				// no selected dish
+			}else{
+				console.log("oneDishId: "+oneDishId);
+				var oneDish = model.getDish(oneDishId);
+				console.log("oneDish: "+oneDish);
 
-		    var oneDishAllIngredientsHtml = "";
+				this.oneDishName.html(oneDish.Title);
+				this.oneDishImage.html("<a class=\"thumbnail\">"+"<img class=\"img-responsive center-block imageheight\" src='"+oneDish.ImageURL+"'></a>");
+				this.oneDishDescription.html(oneDish.Description);
+				
+				this.oneDishTotalPrice.html(model.getDishTotalPrice(oneDishId));
 
-		    var oneDishAllIngredientsArray = oneDish.Ingredients;
-		    console.log("oneDishAllIngredientsArray: "+oneDishAllIngredientsArray);
+			    var oneDishAllIngredientsHtml = "";
 
-			for (key in oneDishAllIngredientsArray) {
-				oneDishAllIngredientsHtml +="<div class=\"col-md-12 col-sm-12 col-xs-12\">"+
-												"<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
-													oneDishAllIngredientsArray[key].DisplayQuantity+
-												"</div>"+
-												"<div class=\"col-md-2 col-sm-2 col-xs-2\">"+
-													oneDishAllIngredientsArray[key].Unit+
-												"</div>"+
-												"<div class=\"col-md-6 col-sm-6 col-xs-5\">"+
-												    oneDishAllIngredientsArray[key].Name+
-												"</div>"+
-												"<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
-													"SEK"+
-											    "</div>"+
-											    "<div class=\"col-md-1 col-sm-1 col-xs-1\">1"+
-											    "</div>"+
-												"<br/>"+"<br/>"+
-											"</div>";
-		    }
-			
-			this.oneDishAllIngredients.html(oneDishAllIngredientsHtml);
+			    var oneDishAllIngredientsArray = oneDish.Ingredients;
+			    console.log("oneDishAllIngredientsArray: "+oneDishAllIngredientsArray);
+
+				for (key in oneDishAllIngredientsArray) {
+					oneDishAllIngredientsHtml +="<div class=\"col-md-12 col-sm-12 col-xs-12\">"+
+													"<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
+														oneDishAllIngredientsArray[key].DisplayQuantity+
+													"</div>"+
+													"<div class=\"col-md-2 col-sm-2 col-xs-2\">"+
+														oneDishAllIngredientsArray[key].Unit+
+													"</div>"+
+													"<div class=\"col-md-6 col-sm-6 col-xs-5\">"+
+													    oneDishAllIngredientsArray[key].Name+
+													"</div>"+
+													"<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
+														"SEK"+
+												    "</div>"+
+												    "<div class=\"col-md-1 col-sm-1 col-xs-1\">1"+
+												    "</div>"+
+													"<br/>"+"<br/>"+
+												"</div>";
+			    }
+				
+				this.oneDishAllIngredients.html(oneDishAllIngredientsHtml);
+			}
+
 		}else{
 			//do nothing
 		}

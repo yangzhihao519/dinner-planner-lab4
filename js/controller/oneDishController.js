@@ -5,17 +5,5 @@ var OneDishController = function (view, model) {
 		console.log("selectedDishId: "+selectedDishId);
 
 		model.addDishToMenu(selectedDishId);
-
-		$('.removeDish').on('click', (function(){
-			console.log("click remove");
-			var id = $(this).attr("id");
-			model.removeDishFromMenu(id);
-
-			$('.removeDish').on('click', (function(){
-				console.log("click remove");
-				var id = $(this).attr("id");
-				model.removeDishFromMenu(id);
-			}));
-		}));
 	});
 }

@@ -37,6 +37,7 @@ var MyDinnerView = function(container, model){
 							"</tr>";
 
 			this.myMenu.html(myMenuHtml);
+
 		}else{
 			// do nothing..
 		}

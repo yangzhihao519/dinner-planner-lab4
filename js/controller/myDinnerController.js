@@ -11,4 +11,9 @@ var MyDinnerController = function (view, model) {
 	view.minusButton.click(function(){
 		model.setNumberOfGuests(model.getNumberOfGuests() - 1);
 	});
+
+	$('#myMenu').on('click', '.removeDish', function (event) {
+	    var id = $('.removeDish').attr("id");
+		model.removeDishFromMenu(id);
+	});
 }

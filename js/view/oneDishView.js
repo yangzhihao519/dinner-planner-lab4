@@ -16,10 +16,8 @@ var OneDishView = function (container, model) {
 	this.oneDishNumberOfGuests.html(model.getNumberOfGuests);
 
 	this.update = function(args){
-		if (args == "numberOfGuests") {
+		if (args == "numberOfGuests" || args == "selectedDishId") {
 			this.oneDishNumberOfGuests.html(model.getNumberOfGuests);
-
-		}else if(args == "selectedDishId"){
 			var oneDishId = model.getSelectedDishId();
 			console.log("oneDishId: "+oneDishId);
 			var oneDish = model.getDish(oneDishId);

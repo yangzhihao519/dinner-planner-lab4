@@ -11,9 +11,8 @@ var DinnerOverviewView = function (container, model) {
     this.dinnerOverviewViewNumberOfGuests.html(model.getNumberOfGuests);
 
 	this.update = function(args){
-		if (args == "numberOfGuests") {
+		if (args == "numberOfGuests" || args == "menu") {
 			this.dinnerOverviewViewNumberOfGuests.html(model.getNumberOfGuests);
-		}else if(args == "menu"){
 			var myDishes = model.getFullMenu();
     
 		    this.dinnerOverviewViewTotalPrice.html(model.getTotalMenuPrice());

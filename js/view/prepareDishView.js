@@ -15,13 +15,26 @@ var PrepareDishView = function (container, model) {
 			this.numberOfPeople.html(model.getNumberOfGuests);
 		}else if(args == "menu"){
 			var dishes = model.getFullMenu();
-			var prepareDishHtml = "",
-				desp = "Description:"
+			var prepareDishHtml = "";
 			
 			for(i=0; i< dishes.length; i++)
 			{
 				var dish = dishes[i];
-						
+				var description = "(No description available)";
+				var instructions = "(No instructions available)";
+
+				if(dish.Description){
+					description = dish.Description;
+				}else{
+					// do nothing
+				}
+
+				if(dish.Instructions){
+					instructions = dish.Instructions;
+				}else{
+					// do nothing
+				}
+
 				prepareDishHtml += "<div class=\"panel panel-default\">"+
 										"<div class=\"panel-body\">"+
 											"<div class=\"col-md-12\">"+
@@ -33,12 +46,12 @@ var PrepareDishView = function (container, model) {
 												"<div class=\"col-md-3\">"+
 													"<h3>"+dish.Title+"</h3>"+
 													"<div class=\"col-md-12\">"+
-														"<span>"+dish.Description+ "</span>"+
+														"<span>"+description+ "</span>"+
 													"</div>"+
 												"</div>"+
 												"<div class=\"col-md-6\">"+
-													"<h3>"+desp+"</h3>"+
-													"<span>"+dish.Description + "</span>"+
+													"<h3>Instructions</h3>"+
+													"<span>"+instructions+ "</span>"+
 												"</div>"+
 											"</div>"+
 										"</div>"+

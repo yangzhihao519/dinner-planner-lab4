@@ -52,6 +52,7 @@ var MyDinnerView = function(container, model){
 									"<td><b>Total</b></td>"+
 									"<td><b>" + pendingTotalPrice +" SEK</b></td>"+
 							    "</tr>";
+								
 		    }
 
 			this.myMenu.html(myMenuHtml);

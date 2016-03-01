@@ -16,4 +16,8 @@ var MyDinnerController = function (view, model) {
 	    var id = $('.removeDish').attr("id");
 		model.removeDishFromMenu(id);
 	});
+
+	$("#confirmDinnerButton").on('click', function(){
+		model.setSelectedDishId("");
+	});
 }

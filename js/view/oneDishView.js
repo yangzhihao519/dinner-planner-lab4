@@ -26,7 +26,7 @@ var OneDishView = function (container, model) {
 			console.log("oneDish: "+oneDish);
 
 			this.oneDishName.html(oneDish.Title);
-			this.oneDishImage.html("<a class=\"thumbnail\">"+"<img class=\"img-responsive center-block imageheight\" src=\"images/toast.jpg\">"+"</a>");
+			this.oneDishImage.html("<a class=\"thumbnail\">"+"<img class=\"img-responsive center-block imageheight\" src='"+oneDish.ImageURL+"'></a>");
 			this.oneDishDescription.html(oneDish.Description);
 			
 			this.oneDishTotalPrice.html(model.getDishTotalPrice(oneDishId));

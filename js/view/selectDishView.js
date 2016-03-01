@@ -20,7 +20,7 @@ var SelectDishView = function (container, model) {
 				allDishesHtml += "<div class=\"col-md-4 col-sm-12 col-xs-12 displayedDish\" id="+allDishes[key].RecipeID+">"+
 								            "<div class=\"col-md-12 col-sm-12 col-xs-12 thumb\">"+
 									            "<a class=\"thumbnail\" onclick=\"selectedDishDetails()\">"+
-										        	"<img href=\"\" class=\"img-responsive center-block imageheight\" src='images/toast.jpg"+ "'>"+
+										        	"<img href=\"\" class=\"img-responsive center-block imageheight\" src='"+ allDishes[key].ImageURL +"'>"+
 									            "</a>"+
 								            "</div>"+
 									        "<div class=\"col-md-12 col-sm-12 col-xs-12 thumb\">"+
@@ -30,9 +30,9 @@ var SelectDishView = function (container, model) {
 												        "<p class=\"parapadding\">"+ allDishes[key].Category+"</p>"+
 											"</div>"+
 										"</div>";
-
-				$("#allDishes").html(allDishesHtml);
 		    }
+
+		    $("#allDishes").html(allDishesHtml);
 		}
 		else{
 			// do nothing

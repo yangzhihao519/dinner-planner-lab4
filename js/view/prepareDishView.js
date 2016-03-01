@@ -27,7 +27,7 @@ var PrepareDishView = function (container, model) {
 											"<div class=\"col-md-12\">"+
 												"<div class=\"col-md-3 thumb\">"+
 													"<a class=\"thumbnail\">"+
-													"<img class=\"img-responsive center-block imageheight\" src='images/toast.jpg" +"'>"+
+														"<img class=\"img-responsive center-block imageheight\" src='" + dish.ImageURL +"'>"+
 													"</a>"+
 												"</div>"+
 												"<div class=\"col-md-3\">"+

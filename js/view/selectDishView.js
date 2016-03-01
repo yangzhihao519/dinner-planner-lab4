@@ -24,7 +24,7 @@ var SelectDishView = function (container, model) {
 									            "</a>"+
 								            "</div>"+
 									        "<div class=\"col-md-12 col-sm-12 col-xs-12 thumb parapadding\">"+
-									        	"<h4><span>" + allDishes[key].Title + "</span></h4>"+
+									        	"<h5><span>" + allDishes[key].Title + "</span></h5>"+
 									        "</div>"+
 									        /*"<div class=\"col-md-12 col-sm-12 col-xs-12 thumb\">"+
 												        "<p class=\"parapadding\">"+ allDishes[key].Category+"</p>"+

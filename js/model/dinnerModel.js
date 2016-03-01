@@ -189,29 +189,35 @@ var DinnerModel = function() {
 													"&any_kw=" + anyKeyWord +
 													"&title_kw=" + titleKeyWord +
 													"&pg=1&rpp=20"
-		console.log("url: "+url);
-
+		//console.log("url: "+url);
+		var loader;
 		var self = this;
 		$.ajax({
 		        type: "GET",
 		        dataType: 'json',
 		        cache: false,
 		        url: url,
+				beforeSend: function() { $('#loadingIcon').show();},
+				complete: function() { $("#loadingIcon").hide();},
 		        success: function (data) {
 		            dishes = data["Results"];
-		            console.log(dishes);
+		            //console.log(dishes);
 
 		            var args = {type:"selectDish", content:dishes};
- 					console.log(args);
+ 					//console.log(args);
 		            self.notify(args);
 
 	            	$(".displayedDish").click(function(){
-	            		console.log("displayedDish click");
+	            		//console.log("displayedDish click");
 						var id = $(this).attr('id');
-						console.log(".displayedDish.click id: "+id);
+						//console.log(".displayedDish.click id: "+id);
 						self.setSelectedDishId(id);
 					});
-		        }
+		        },
+				error: function(e) { 
+                    alert("An Error occured: " + e.status + " "+ e.statusText);  
+                } 
+				
 		});
 
 		// return $(dishes).filter(function(index,dish) {

@@ -19,16 +19,16 @@ var SelectDishView = function (container, model) {
 
 				allDishesHtml += "<div class=\"col-md-4 col-sm-12 col-xs-12 displayedDish\" id="+allDishes[key].RecipeID+">"+
 								            "<div class=\"col-md-12 col-sm-12 col-xs-12 thumb\">"+
-									            "<a class=\"thumbnail\" onclick=\"selectedDishDetails()\">"+
+									            "<a class=\"thumbnail\" onclick=\"selectedDishDetails()\" style=\"margin-bottom: 5px\">"+
 										        	"<img href=\"\" class=\"img-responsive center-block imageheight\" src='"+ allDishes[key].ImageURL +"'>"+
 									            "</a>"+
 								            "</div>"+
-									        "<div class=\"col-md-12 col-sm-12 col-xs-12 thumb\">"+
-									        	"<span class=\"input-group-addon\">" + allDishes[key].Title + "</span>"+
+									        "<div class=\"col-md-12 col-sm-12 col-xs-12 thumb parapadding\">"+
+									        	"<h4><span>" + allDishes[key].Title + "</span></h4>"+
 									        "</div>"+
-									        "<div class=\"col-md-12 col-sm-12 col-xs-12 thumb\">"+
+									        /*"<div class=\"col-md-12 col-sm-12 col-xs-12 thumb\">"+
 												        "<p class=\"parapadding\">"+ allDishes[key].Category+"</p>"+
-											"</div>"+
+											"</div>"+*/
 										"</div>";
 		    }
 

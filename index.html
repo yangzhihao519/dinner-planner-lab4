@@ -14,6 +14,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
+	<style>
+	.modal {
+    display:    none;
+	top: 10%;
+    <!--position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0; -->
+    height:     100%;
+    width:      100%;
+	}
+	<!-- When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden 
+body.loading {
+    overflow: hidden;   
+}-->
+
+<!-- Anytime the body has the loading class, our
+   modal element will be visible 
+body.loading .modal {
+    display: block;
+}-->
+	</style>
   </head>
   <body>
 	<div class="container-fluid">
@@ -134,7 +157,9 @@
 								<h1> Dishes to be selected</h1>
 								<div>
 									<br/>
-									<div id="allDishes"></div>
+									<div id="allDishes">
+										
+									</div>
 								</div>
 							</div>
 						</div>
@@ -247,11 +272,20 @@
 			</div> 
 			
 <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-		    
+		    <div id="loadingIcon" class="modal">
+				<p><img src="images/loading.gif"/></p>
+			</div>
 		</div>  <!-- end of row -->
 	</div>	<!-- end of container -->
 	
 	<script>
+		
+	
+	$body = $("body");
+		$(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+     ajaxStop: function() { $body.removeClass("loading"); }    
+});
 		function DinnerMenu()    // view1 to view2+3
 		{
 			$('#landing').hide();

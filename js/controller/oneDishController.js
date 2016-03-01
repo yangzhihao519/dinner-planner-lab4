@@ -5,5 +5,10 @@ var OneDishController = function (view, model) {
 		console.log("selectedDishId: "+selectedDishId);
 
 		model.addDishToMenu(selectedDishId);
+		model.setSelectedDishId("");
+	});
+
+	$("#backToSelectDishButton").on("click", function(){
+		model.setSelectedDishId("");
 	});
 }

@@ -11,10 +11,10 @@ var MyDinnerView = function(container, model){
 	this.numberOfGuests.html(model.getNumberOfGuests);
 
 	this.update = function(args){
-		if (args == "numberOfGuests") {
+		if (args == "numberOfGuests" || args == "menu") {
 			this.numberOfGuests.html(model.getNumberOfGuests);
-		}else if(args == "menu"){
 			var dishesInFullMenu = model.getFullMenu();
+			console.log("dishesInFullMenu: "+dishesInFullMenu);
 			var myMenuHtml = "";
 
 			for(key in dishesInFullMenu){
@@ -22,9 +22,9 @@ var MyDinnerView = function(container, model){
 		    	console.log("MyDinnerView dish: "+dish);
 
 		    	myMenuHtml +=   "<tr>"+ 
-			    					"<td>"+dish.name+"</td>"+
-			    					"<td>"+model.getDishTotalPrice(dish.id)+" SEK</td>"+
-									"<td><span class=\"glyphicon glyphicon-remove removeDish\" id="+dish.id+"></td>"+
+			    					"<td>"+dish.Title+"</td>"+
+			    					"<td>"+model.getDishTotalPrice(dish)+" SEK</td>"+
+									"<td><span class=\"glyphicon glyphicon-remove removeDish\" id="+dish.RecipeID+"></td>"+
 		    					"</tr>";
 
 		    }
@@ -35,6 +35,7 @@ var MyDinnerView = function(container, model){
 							"</tr>";
 
 			this.myMenu.html(myMenuHtml);
+
 		}else{
 			// do nothing..
 		}

@@ -27,18 +27,18 @@ var PrepareDishView = function (container, model) {
 											"<div class=\"col-md-12\">"+
 												"<div class=\"col-md-3 thumb\">"+
 													"<a class=\"thumbnail\">"+
-													"<img class=\"img-responsive center-block imageheight\" src='images/"+dish.image+"'>"+
+														"<img class=\"img-responsive center-block imageheight\" src='" + dish.ImageURL +"'>"+
 													"</a>"+
 												"</div>"+
 												"<div class=\"col-md-3\">"+
-													"<h3>"+dish.name+"</h3>"+
+													"<h3>"+dish.Title+"</h3>"+
 													"<div class=\"col-md-12\">"+
-														"<span>"+dish.description+ "</span>"+
+														"<span>"+dish.Description+ "</span>"+
 													"</div>"+
 												"</div>"+
 												"<div class=\"col-md-6\">"+
 													"<h3>"+desp+"</h3>"+
-													"<span>"+dish.description + "</span>"+
+													"<span>"+dish.Description + "</span>"+
 												"</div>"+
 											"</div>"+
 										"</div>"+

@@ -18,37 +18,39 @@ var OneDishView = function (container, model) {
 	this.update = function(args){
 		if (args == "numberOfGuests") {
 			this.oneDishNumberOfGuests.html(model.getNumberOfGuests);
+
 		}else if(args == "selectedDishId"){
 			var oneDishId = model.getSelectedDishId();
 			console.log("oneDishId: "+oneDishId);
 			var oneDish = model.getDish(oneDishId);
 			console.log("oneDish: "+oneDish);
 
-			this.oneDishName.html(oneDish.name);
-			this.oneDishImage.html("<a class=\"thumbnail\">"+"<img class=\"img-responsive center-block imageheight\" src=\"images/"+oneDish.image+"\">"+"</a>");
-			this.oneDishDescription.html(oneDish.description);
+			this.oneDishName.html(oneDish.Title);
+			this.oneDishImage.html("<a class=\"thumbnail\">"+"<img class=\"img-responsive center-block imageheight\" src=\"images/toast.jpg\">"+"</a>");
+			this.oneDishDescription.html(oneDish.Description);
 			
 			this.oneDishTotalPrice.html(model.getDishTotalPrice(oneDishId));
 
 		    var oneDishAllIngredientsHtml = "";
-		    var oneDishAllIngredientsArray = oneDish.ingredients;
+
+		    var oneDishAllIngredientsArray = oneDish.Ingredients;
+		    console.log("oneDishAllIngredientsArray: "+oneDishAllIngredientsArray);
 
 			for (key in oneDishAllIngredientsArray) {
 				oneDishAllIngredientsHtml +="<div class=\"col-md-12 col-sm-12 col-xs-12\">"+
 												"<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
-													oneDishAllIngredientsArray[key].quantity+
+													oneDishAllIngredientsArray[key].DisplayQuantity+
 												"</div>"+
 												"<div class=\"col-md-2 col-sm-2 col-xs-2\">"+
-													oneDishAllIngredientsArray[key].unit+
+													oneDishAllIngredientsArray[key].Unit+
 												"</div>"+
 												"<div class=\"col-md-6 col-sm-6 col-xs-5\">"+
-												    oneDishAllIngredientsArray[key].name+
+												    oneDishAllIngredientsArray[key].Name+
 												"</div>"+
 												"<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
 													"SEK"+
 											    "</div>"+
-											    "<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
-											       oneDishAllIngredientsArray[key].price+
+											    "<div class=\"col-md-1 col-sm-1 col-xs-1\">1"+
 											    "</div>"+
 												"<br/>"+"<br/>"+
 											"</div>";

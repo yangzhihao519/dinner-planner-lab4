@@ -26,10 +26,10 @@ var DinnerOverviewView = function (container, model) {
 							            "</a>"+
 						            "</div>"+
 							        "<div class=\"col-md-12 col-xs-8 thumb\">"+
-							        	"<span class=\"input-group-addon\">" + myDishes[i].Title + "</span>"+
+							        	"<h5><span>" + myDishes[i].Title + "</span></h5>"+
 							        "</div>"+
 							        "<div class=\"col-md-12 col-xs-8 thumb\">"+
-										        "<p class=\"parapadding\">"+model.getDishTotalPrice(myDishes[i])+" SEK</p>"+
+										"<p class=\"parapadding\">"+model.getDishTotalPrice(myDishes[i])+" SEK</p>"+
 									"</div>"+
 								"</div>";
 		    }

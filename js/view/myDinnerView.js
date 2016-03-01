@@ -50,7 +50,7 @@ var MyDinnerView = function(container, model){
 								"</tr>"+
 								"<tr>"+
 									"<td><b>Total</b></td>"+
-									"<td><b>" + model.getTotalMenuPrice() +" SEK</b></td>"+
+									"<td><b>" + pendingTotalPrice +" SEK</b></td>"+
 							    "</tr>";
 		    }
 

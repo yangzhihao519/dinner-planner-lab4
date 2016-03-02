@@ -116,23 +116,25 @@ var DinnerModel = function() {
 	this.getDishTotalPrice = function (dish) {
 		//console.log("getDishTotalPrice id: "+id);
 		// due to the ingredients are lost in bigoven, we set the default price as 100 per dish
+
 		var dishTotalPrice = 0; 
 
-		//var dish = this.getDish(id);
-		//console.log("dish: "+dish);
+		if(dish){
+			if(dish.Ingredients){
+				var allIngredients = dish.Ingredients;
+				console.log("allIngredients: "+allIngredients);
 
-		if(dish.Ingredients){
-			var allIngredients = dish.Ingredients;
-			console.log("allIngredients: "+allIngredients);
-
-			for(key in allIngredients){
-				// console.log("ingredient: "+allIngredients[key]);
-				// console.log("ingredient.Quantity: "+allIngredients[key].Quantity);
-				dishTotalPrice += Number(allIngredients[key].Quantity)* 1 * numberOfGuests;
-				console.log("dishTotalPrice: "+dishTotalPrice);
+				for(key in allIngredients){
+					// console.log("ingredient: "+allIngredients[key]);
+					// console.log("ingredient.Quantity: "+allIngredients[key].Quantity);
+					dishTotalPrice += Number(allIngredients[key].Quantity)* 1 * numberOfGuests;
+					console.log("dishTotalPrice: "+dishTotalPrice);
+				}
+			}else{
+				// do nothing
 			}
 		}else{
-			// do nothing
+			//dishTotalPrice = this.getDishTotalPrice(selectedDish);
 		}
 
 		return dishTotalPrice;
@@ -287,12 +289,6 @@ var DinnerModel = function() {
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id) {
-	 //    for(key in dishes){
-		// 	if(dishes[key].RecipeID == id) {
-		// 		return dishes[key];
-		// 	}
-		// }
-
 		var apiKey = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
 		var recipeID = id;
 		var url = "http://api.bigoven.com/recipe/" + recipeID + "?api_key="+apiKey;

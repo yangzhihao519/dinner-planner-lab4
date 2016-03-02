@@ -41,7 +41,7 @@ var MyDinnerView = function(container, model){
 							    "</tr>";
 		    }
 		    else{
-		    	var pendingPrice = model.getDishTotalPrice(selectedDishId);
+		    	var pendingPrice = model.getDishTotalPrice();
 		    	var pendingTotalPrice = pendingPrice + model.getTotalMenuPrice();
 
 		        myMenuHtml +=   "<tr>"+

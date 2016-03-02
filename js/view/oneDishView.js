@@ -30,7 +30,7 @@ var OneDishView = function (container, model) {
 		}else if(args["type"] === "setOneDish"){
 			console.log("oneDishId: "+oneDishId);
 			var oneDish = args["content"];
-			
+
 			if(oneDish){
 				console.log("oneDish: "+oneDish);
 
@@ -46,12 +46,26 @@ var OneDishView = function (container, model) {
 			    console.log("oneDishAllIngredientsArray: "+oneDishAllIngredientsArray);
 
 				for (key in oneDishAllIngredientsArray) {
+					var displayQuantity = oneDishAllIngredientsArray[key].DisplayQuantity;
+					if (displayQuantity) {
+						// do nothing
+					}else{
+						displayQuantity = "";
+					}
+
+					var unit = oneDishAllIngredientsArray[key].Unit;
+					if (unit) {
+						// do nothing
+					}else{
+						unit = "";
+					}
+
 					oneDishAllIngredientsHtml +="<div class=\"col-md-12 col-sm-12 col-xs-12\">"+
 													"<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
-														oneDishAllIngredientsArray[key].DisplayQuantity+
+														displayQuantity+
 													"</div>"+
 													"<div class=\"col-md-2 col-sm-2 col-xs-2\">"+
-														oneDishAllIngredientsArray[key].Unit+
+														unit+
 													"</div>"+
 													"<div class=\"col-md-6 col-sm-6 col-xs-5\">"+
 													    oneDishAllIngredientsArray[key].Name+

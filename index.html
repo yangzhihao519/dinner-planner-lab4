@@ -169,7 +169,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<hr/>
 							<div class="col-md-4 col-sm-4 col-xs-4">
-								<button type="button" class="btn btn-default" id="confirmDishButton" onclick="selectDish()">Confirm dish</button>
+								<button type="button" class="btn btn-default" id="confirmDishButton">Confirm dish</button>
 							</div>
 							<div class="col-md-1 col-md-offset-5 col-sm-1 col-sm-offset-4 col-xs-1 col-xs-offset-4">
 								<b>SEK </b>
@@ -193,7 +193,7 @@
 								<p class="lead">Dinner: <span id="dinnerOverviewViewNumberOfGuests"></span><span> People</span></p>
 							</div>
 							<div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-5">
-								<button type="button" class="btn btn-primary" onclick="selectDish()">Edit Dinner</button>
+								<button type="button" class="btn btn-primary" id="backToEditDinnerView5Button">Edit Dinner</button>
 							</div>
 						</div>
 					</div>
@@ -214,7 +214,7 @@
 						<b>Total: <span id="dinnerOverviewViewTotalPrice"></span> SEK </b>
 					</div>
 					<div class="col-md-2 col-sm-2 col-xs-4">
-						<button type="button" class="btn btn-success" onclick="fullRecipe()">Print Full Recipe</button>
+						<button type="button" class="btn btn-success" id="printFullRecipeButton">Print Full Recipe</button>
 					</div>
 				</div>
 			</div>
@@ -231,7 +231,7 @@
 								<p class="lead">My Dinner: <span id="numberOfPeople"></span><span> People</span></p>
 							</div>
 							<div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-5">
-								<button type="button" class="btn btn-primary pull-right" onclick="selectDish()">Edit Dinner</button>
+								<button type="button" class="btn btn-primary pull-right"  id="backToEditDinnerView6Button" >Edit Dinner</button>
 							</div>
 						</div>
 					</div>
@@ -264,20 +264,7 @@
 	    ajaxStart: function() { $body.addClass("loading");    },
 	     ajaxStop: function() { $body.removeClass("loading"); }    
 	});
-
-		function confirmDinner()   // view2+3/4 to view5
-		{
-			$('#myDinnerView').hide();
-			$('#selectDishView').hide();
-			$('#oneDishView').hide();
-			$('#dinnerOverviewView').show();
-		}
 		
-		function fullRecipe()    // view5 to view6
-		{
-			$('#dinnerOverviewView').hide();
-			$('#prepareDishView').show();
-		}			
 	</script>
 
     <!-- jQuery -->
@@ -292,12 +279,15 @@
 	<script src="js/view/myDinnerView.js"></script>
 	<script src="js/view/selectDishView.js"></script>
     <script src="js/view/oneDishView.js"></script>
-    <script src="js/view/prepareDishView.js"></script>
 	<script src="js/view/dinnerOverviewView.js"></script>
+	<script src="js/view/prepareDishView.js"></script>
 	<script src="js/controller/landingPageController.js"></script>
 	<script src="js/controller/myDinnerController.js"></script>	
 	<script src="js/controller/myDinnerController.js"></script>
 	<script src="js/controller/selectDishController.js"></script>
 	<script src="js/controller/oneDishController.js"></script>
+	<script src="js/controller/dinnerOverviewController.js"></script>
+	<script src="js/controller/prepareDishController.js"></script>
+
   </body>
 </html>

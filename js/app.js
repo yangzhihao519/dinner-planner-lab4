@@ -15,8 +15,9 @@ $(function() {
 	var oneDishView = new OneDishView($("#oneDishView"), model);
 	var oneDishController = new OneDishController(oneDishView, model);
 
-	var prepareDishView = new PrepareDishView($("#prepareDishView"),model);
 	var dinnerOverviewView = new DinnerOverviewView($('#dinnerOverviewView'), model);
+	var dinnerOverviewController = new DinnerOverviewController(dinnerOverviewView, model);
 
-	// model.getAllDishes("appetizer");
+	var prepareDishView = new PrepareDishView($("#prepareDishView"),model);
+	var prepareDishController = new PrepareDishController(prepareDishView, model);
 });

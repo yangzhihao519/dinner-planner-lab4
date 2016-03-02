@@ -11,7 +11,7 @@ var MyDinnerView = function(container, model){
 	this.numberOfGuests.html(model.getNumberOfGuests);
 
 	this.update = function(args){
-		if (args == "numberOfGuests" || args == "menu" || args == "selectedDishId") {
+		if (args === "numberOfGuests" || args === "menu" || args === "selectedDishId" || args["type"] === "setOneDish") {
 			this.numberOfGuests.html(model.getNumberOfGuests);
 			var dishesInFullMenu = model.getFullMenu();
 			console.log("dishesInFullMenu: "+dishesInFullMenu);
@@ -28,32 +28,28 @@ var MyDinnerView = function(container, model){
 		    					"</tr>";
 		    }
 
-		    var selectedDishId = model.getSelectedDishId();
-		    if(!selectedDishId || 0 === selectedDishId.length){
-		    	// no dish selected
-		        myMenuHtml +=   "<tr>"+
-									"<td><b>Pending</b></td>"+
-									"<td><b>0.0 SEK</b></td>"+
-								"</tr>"+
-								"<tr>"+
-									"<td><b>Total</b></td>"+
-									"<td><b>"+model.getTotalMenuPrice()+" SEK</b></td>"+
-							    "</tr>";
-		    }
-		    else{
-		    	var pendingPrice = model.getDishTotalPrice(selectedDishId);
-		    	var pendingTotalPrice = pendingPrice + model.getTotalMenuPrice();
+		    var pendingPrice = 0.0;
+		    var totalPrice = model.getTotalMenuPrice();
 
-		        myMenuHtml +=   "<tr>"+
-									"<td><b>Pending</b></td>"+
-									"<td><b>"+ pendingPrice +" SEK</b></td>"+
-								"</tr>"+
-								"<tr>"+
-									"<td><b>Total</b></td>"+
-									"<td><b>" + pendingTotalPrice +" SEK</b></td>"+
-							    "</tr>";
-								
+		    if(args["type"] === "setOneDish"){
+		    	var pendingDish = args["content"];
+		    	if(pendingDish){
+					pendingPrice = model.getDishTotalPrice(pendingDish);
+			    	totalPrice += pendingPrice;
+		    	}else{
+				   // do nothing
+				}
+		    }else{
+				// do nothing
 		    }
+                    myMenuHtml +=   "<tr>"+
+								"<td><b>Pending</b></td>"+
+								"<td><b>"+ pendingPrice +" SEK</b></td>"+
+							"</tr>"+
+							"<tr>"+
+								"<td><b>Total</b></td>"+
+								"<td><b>" + totalPrice +" SEK</b></td>"+
+						    "</tr>";
 
 			this.myMenu.html(myMenuHtml);
 

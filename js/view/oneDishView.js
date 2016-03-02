@@ -16,7 +16,7 @@ var OneDishView = function (container, model) {
 	this.oneDishNumberOfGuests.html(model.getNumberOfGuests);
 
 	this.update = function(args){
-		if (args == "numberOfGuests" || args == "selectedDishId") {
+		if (args === "numberOfGuests" || args === "selectedDishId") {
 			this.oneDishNumberOfGuests.html(model.getNumberOfGuests);
 
 			var oneDishId = model.getSelectedDishId();
@@ -24,15 +24,21 @@ var OneDishView = function (container, model) {
 			if(!oneDishId || 0 === oneDishId.length){
 				// no selected dish
 			}else{
-				console.log("oneDishId: "+oneDishId);
-				var oneDish = model.getDish(oneDishId);
+				model.getDish(oneDishId);
+			}
+
+		}else if(args["type"] === "setOneDish"){
+			console.log("oneDishId: "+oneDishId);
+			var oneDish = args["content"];
+
+			if(oneDish){
 				console.log("oneDish: "+oneDish);
 
 				this.oneDishName.html(oneDish.Title);
 				this.oneDishImage.html("<a class=\"thumbnail\">"+"<img class=\"img-responsive center-block imageheight\" src='"+oneDish.ImageURL+"'></a>");
 				this.oneDishDescription.html(oneDish.Description);
 				
-				this.oneDishTotalPrice.html(model.getDishTotalPrice(oneDishId));
+				this.oneDishTotalPrice.html(model.getDishTotalPrice(oneDish));
 
 			    var oneDishAllIngredientsHtml = "";
 
@@ -40,12 +46,26 @@ var OneDishView = function (container, model) {
 			    console.log("oneDishAllIngredientsArray: "+oneDishAllIngredientsArray);
 
 				for (key in oneDishAllIngredientsArray) {
+					var displayQuantity = oneDishAllIngredientsArray[key].DisplayQuantity;
+					if (displayQuantity) {
+						// do nothing
+					}else{
+						displayQuantity = "";
+					}
+
+					var unit = oneDishAllIngredientsArray[key].Unit;
+					if (unit) {
+						// do nothing
+					}else{
+						unit = "";
+					}
+
 					oneDishAllIngredientsHtml +="<div class=\"col-md-12 col-sm-12 col-xs-12\">"+
 													"<div class=\"col-md-1 col-sm-1 col-xs-1\">"+
-														oneDishAllIngredientsArray[key].DisplayQuantity+
+														displayQuantity+
 													"</div>"+
 													"<div class=\"col-md-2 col-sm-2 col-xs-2\">"+
-														oneDishAllIngredientsArray[key].Unit+
+														unit+
 													"</div>"+
 													"<div class=\"col-md-6 col-sm-6 col-xs-5\">"+
 													    oneDishAllIngredientsArray[key].Name+
@@ -60,11 +80,9 @@ var OneDishView = function (container, model) {
 			    }
 				
 				this.oneDishAllIngredients.html(oneDishAllIngredientsHtml);
+			}else{
+				// do nothing
 			}
-
-		}else{
-			//do nothing
 		}
-
 	}
 }

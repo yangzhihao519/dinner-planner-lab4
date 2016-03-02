@@ -8,6 +8,7 @@ var DinnerModel = function() {
 	var dishesInMenu = [];
 	var dishes = [];
 	var selectedDishId = "";
+	var selectedDish;
 
 	this._observers = [];
 
@@ -115,16 +116,20 @@ var DinnerModel = function() {
 	this.getDishTotalPrice = function (dish) {
 		//console.log("getDishTotalPrice id: "+id);
 		// due to the ingredients are lost in bigoven, we set the default price as 100 per dish
-		var dishTotalPrice = 100 * numberOfGuests; 
+		var dishTotalPrice = 0; 
 
 		//var dish = this.getDish(id);
 		//console.log("dish: "+dish);
 
-		if(dish.hasOwnProperty('Ingredients')){
+		if(dish.Ingredients){
 			var allIngredients = dish.Ingredients;
-			
+			console.log("allIngredients: "+allIngredients);
+
 			for(key in allIngredients){
-				dishTotalPrice += allIngredients[key].Quantity * 1 * numberOfGuests;
+				// console.log("ingredient: "+allIngredients[key]);
+				// console.log("ingredient.Quantity: "+allIngredients[key].Quantity);
+				dishTotalPrice += Number(allIngredients[key].Quantity)* 1 * numberOfGuests;
+				console.log("dishTotalPrice: "+dishTotalPrice);
 			}
 		}else{
 			// do nothing
@@ -156,7 +161,7 @@ var DinnerModel = function() {
 		//TODO Lab 2 
 		console.log("Dishes in menu by sak: "+ dishesInMenu);
 		
-		var newDish = this.getDish(id);
+		var newDish = selectedDish;
 
 		for(key in dishesInMenu){
 			if(dishesInMenu[key].Category === newDish.Category){
@@ -214,7 +219,6 @@ var DinnerModel = function() {
 		        success: function (data) {
 		            dishes = data["Results"];
 		            console.log("DISHES from api: "+dishes);
-
 					
 					if (dishes) {
 						var args = {type:"selectDish", content:dishes};
@@ -283,11 +287,31 @@ var DinnerModel = function() {
 
 	//function that returns a dish of specific ID
 	this.getDish = function (id) {
-	  for(key in dishes){
-			if(dishes[key].RecipeID == id) {
-				return dishes[key];
-			}
-		}
+	 //    for(key in dishes){
+		// 	if(dishes[key].RecipeID == id) {
+		// 		return dishes[key];
+		// 	}
+		// }
+
+		var apiKey = "r02x0R09O76JMCMc4nuM0PJXawUHpBUL";
+		var recipeID = id;
+		var url = "http://api.bigoven.com/recipe/" + recipeID + "?api_key="+apiKey;
+		var self = this;
+		$.ajax({
+		         type: "GET",
+		         dataType: 'json',
+		         cache: false,
+		         url: url,
+
+		         success: function (data) {
+		            // alert('success');
+		            console.log(data);
+		            selectedDish = data;
+		            var args = {type:"setOneDish", content:selectedDish};
+					//console.log(args);
+					self.notify(args);
+		         }
+		});
 	}
 
 

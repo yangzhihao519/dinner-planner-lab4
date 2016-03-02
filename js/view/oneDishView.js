@@ -16,7 +16,7 @@ var OneDishView = function (container, model) {
 	this.oneDishNumberOfGuests.html(model.getNumberOfGuests);
 
 	this.update = function(args){
-		if (args == "numberOfGuests" || args == "selectedDishId") {
+		if (args === "numberOfGuests" || args === "selectedDishId") {
 			this.oneDishNumberOfGuests.html(model.getNumberOfGuests);
 
 			var oneDishId = model.getSelectedDishId();
@@ -24,15 +24,21 @@ var OneDishView = function (container, model) {
 			if(!oneDishId || 0 === oneDishId.length){
 				// no selected dish
 			}else{
-				console.log("oneDishId: "+oneDishId);
-				var oneDish = model.getDish(oneDishId);
+				model.getDish(oneDishId);
+			}
+
+		}else if(args["type"] === "setOneDish"){
+			console.log("oneDishId: "+oneDishId);
+			var oneDish = args["content"];
+			
+			if(oneDish){
 				console.log("oneDish: "+oneDish);
 
 				this.oneDishName.html(oneDish.Title);
 				this.oneDishImage.html("<a class=\"thumbnail\">"+"<img class=\"img-responsive center-block imageheight\" src='"+oneDish.ImageURL+"'></a>");
 				this.oneDishDescription.html(oneDish.Description);
 				
-				this.oneDishTotalPrice.html(model.getDishTotalPrice(oneDishId));
+				this.oneDishTotalPrice.html(model.getDishTotalPrice(oneDish));
 
 			    var oneDishAllIngredientsHtml = "";
 
@@ -60,11 +66,9 @@ var OneDishView = function (container, model) {
 			    }
 				
 				this.oneDishAllIngredients.html(oneDishAllIngredientsHtml);
+			}else{
+				// do nothing
 			}
-
-		}else{
-			//do nothing
 		}
-
 	}
 }

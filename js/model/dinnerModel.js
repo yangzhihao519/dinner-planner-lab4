@@ -208,6 +208,10 @@ var DinnerModel = function() {
 		            self.notify(args);
 
 	            	$(".displayedDish").click(function(){
+
+	            		$('#selectDishView').hide();
+						$('#oneDishView').show();
+						
 	            		//console.log("displayedDish click");
 						var id = $(this).attr('id');
 						//console.log(".displayedDish.click id: "+id);

@@ -27,13 +27,13 @@
 						<h1>HOMELETTE <small style="color: darkgoldenrod;">  From the best chefs in the world directly into your kitchen</small></h1> 
 					</div>
 					<div id="landingDiv">
-						<div class="textBox">
+						<div class="textBox" id="landingPage">
 							<h3>A Home Dinner Service</h3>
 							<hr/>
 							<p>some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here</p>
 							<br/><br/>
 							<p>start quickly</p>
-							<button type="button" class="btn btn-primary btn-md" onclick="DinnerMenu()"> Create new dinner</button>
+							<button type="button" class="btn btn-primary btn-md" id="createDinnerButton"> Create new dinner</button>
 						</div>
 					</div>
 				</div>  
@@ -260,22 +260,10 @@
 		
 	
 	$body = $("body");
-		$(document).on({
-    ajaxStart: function() { $body.addClass("loading");    },
-     ajaxStop: function() { $body.removeClass("loading"); }    
-});
-		function DinnerMenu()    // view1 to view2+3
-		{
-			$('#landing').hide();
-			$('#myDinnerView').show();
-			$('#selectDishView').show();
-		}
-		
-		function selectedDishDetails()   // view2+3 to view4
-		{
-			$('#selectDishView').hide();
-			$('#oneDishView').show();
-		}
+	$(document).on({
+	    ajaxStart: function() { $body.addClass("loading");    },
+	     ajaxStop: function() { $body.removeClass("loading"); }    
+	});
 
 		function selectDish()    // view 4 to view 2+3
 		{
@@ -309,11 +297,13 @@
 	<!-- The application JavaScript code -->
 	<script src="js/app.js"></script>
 	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/landingPageView.js"></script>
 	<script src="js/view/myDinnerView.js"></script>
 	<script src="js/view/selectDishView.js"></script>
     <script src="js/view/oneDishView.js"></script>
     <script src="js/view/prepareDishView.js"></script>
 	<script src="js/view/dinnerOverviewView.js"></script>
+	<script src="js/controller/landingPageController.js"></script>
 	<script src="js/controller/myDinnerController.js"></script>	
 	<script src="js/controller/myDinnerController.js"></script>
 	<script src="js/controller/selectDishController.js"></script>

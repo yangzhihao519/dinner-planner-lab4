@@ -3,6 +3,9 @@ $(function() {
 	var model = new DinnerModel();
 
 	//And create the needed controllers and views
+	var landingPageView = new LandingPageView($("#landingPage"), model);
+	var landingPageController = new LandingPageController(landingPageView, model);
+
 	var myDinnerView = new MyDinnerView($('#myDinnerView'), model);
 	var myDinnerController = new MyDinnerController(myDinnerView, model);
 
@@ -15,5 +18,5 @@ $(function() {
 	var prepareDishView = new PrepareDishView($("#prepareDishView"),model);
 	var dinnerOverviewView = new DinnerOverviewView($('#dinnerOverviewView'), model);
 
-	model.getAllDishes("appetizer");
+	// model.getAllDishes("appetizer");
 });

@@ -218,11 +218,25 @@ var DinnerModel = function() {
 						self.setSelectedDishId(id);
 					});
 		        },
-				error: function(e) { 
-                    // alert("An Error occured: " + e.status + " "+ e.statusText);  
-                    alert("Sorry, there is an error occured. Please check your internet connection.");
-                } 
-				
+
+				error: function(jqXHR, exception) { 
+                    if (jqXHR.status === 0) {
+						alert('Not connection. Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.n' + jqXHR.responseText);
+					} 
+					this.notify(" ");
+				} 
 		});
 
 		// return $(dishes).filter(function(index,dish) {

@@ -14,7 +14,8 @@ var SelectDishView = function (container, model) {
 			var allDishesHtml = "";
 			var allDishes = args["content"];
 
-			for (key in allDishes) { 
+			if(allDishes){
+				for (key in allDishes) { 
 				console.log("dish: "+allDishes[key]);
 
 				allDishesHtml += "<div class=\"col-md-4 col-sm-12 col-xs-12 displayedDish\" id="+allDishes[key].RecipeID+">"+
@@ -30,8 +31,17 @@ var SelectDishView = function (container, model) {
 												        "<p class=\"parapadding\">"+ allDishes[key].Category+"</p>"+
 											"</div>"+*/
 										"</div>";
-		    }
+		    	}
+			}else{
+				var errorMessage = args["errorMsg"];
 
+				if (errorMessage) {
+					allDishesHtml = errorMessage;
+				}else{
+					allDishesHtml += "Sorry, there is some problem receiveing data.";
+				}
+			}
+			
 		    $("#allDishes").html(allDishesHtml);
 		}
 		else{

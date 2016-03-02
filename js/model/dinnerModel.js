@@ -154,7 +154,17 @@ var DinnerModel = function() {
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
-		dishesInMenu.push(this.getDish(id));
+		var newDish = this.getDish(id);
+
+		for(key in dishesInMenu){
+			if(dishesInMenu[key].Category === newDish.Category){
+				dishesInMenu.splice(key, 1);
+			}else{
+				// do nothing
+			}
+		}
+
+		dishesInMenu.push(newDish);
 
 		this.notify("menu");
 	}

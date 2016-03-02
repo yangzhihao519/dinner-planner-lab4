@@ -214,9 +214,9 @@ var DinnerModel = function() {
 		        success: function (data) {
 		            dishes = data["Results"];
 		            console.log("DISHES from api: "+dishes);
+
 					
-					if(dishes)
-					{
+					if (dishes) {
 						var args = {type:"selectDish", content:dishes};
 						//console.log(args);
 						self.notify(args);
@@ -230,29 +230,35 @@ var DinnerModel = function() {
 							//console.log(".displayedDish.click id: "+id);
 							self.setSelectedDishId(id);
 						});
-					}
-					else 
-					{
-						alert("Problem receiving data");
+					}else{
+						var args = {type:"selectDish", content:dishes, errorMsg: "Sorry, there is some problem receiveing data."};
+						//console.log(args);
+						self.notify(args);
 					}
 		        },
 
 				error: function(jqXHR, exception) { 
+					var errorMessage = "";
+
                     if (jqXHR.status === 0) {
-						alert('Not connection. Verify Network.');
+						errorMessage ='Not connection. Verify Network.';
 					} else if (jqXHR.status == 404) {
-						alert('Requested page not found. [404]');
+						errorMessage ='Requested page not found. [404]';
 					} else if (jqXHR.status == 500) {
-						alert('Internal Server Error [500].');
+						errorMessage ='Internal Server Error [500].';
 					} else if (exception === 'parsererror') {
-						alert('Requested JSON parse failed.');
+						aerrorMessage ='Requested JSON parse failed.';
 					} else if (exception === 'timeout') {
-						alert('Time out error.');
+						errorMessage ='Time out error.';
 					} else if (exception === 'abort') {
-						alert('Ajax request aborted.');
+						errorMessage ='Ajax request aborted.';
 					} else {
-						alert('Uncaught Error.n' + jqXHR.responseText);
+						errorMessage ='Uncaught Error.n' + jqXHR.responseText;
 					} 
+
+                    var args = {type:"selectDish", content:"", errorMsg: errorMessage};
+					//console.log(args);
+					self.notify(args);					
 					//this.notify(" ");
 				} 
 		});

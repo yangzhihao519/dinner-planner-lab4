@@ -213,7 +213,6 @@ var DinnerModel = function() {
 				complete: function() { $("#loadingIcon").hide();},
 		        success: function (data) {
 		            dishes = data["Results"];
-<<<<<<< HEAD
 		            console.log("DISHES from api: "+dishes);
 					
 					if(dishes)
@@ -233,7 +232,6 @@ var DinnerModel = function() {
 					{
 						alert("Problem receiving data");
 					}
-=======
 		            //console.log(dishes);
 
 		            var args = {type:"selectDish", content:dishes};
@@ -250,7 +248,6 @@ var DinnerModel = function() {
 						//console.log(".displayedDish.click id: "+id);
 						self.setSelectedDishId(id);
 					});
->>>>>>> origin/master
 		        },
 
 				error: function(jqXHR, exception) { 

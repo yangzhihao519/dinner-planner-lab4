@@ -213,7 +213,6 @@ var DinnerModel = function() {
 				complete: function() { $("#loadingIcon").hide();},
 		        success: function (data) {
 		            dishes = data["Results"];
-<<<<<<< HEAD
 		            console.log("DISHES from api: "+dishes);
 					
 					if(dishes)
@@ -223,6 +222,9 @@ var DinnerModel = function() {
 						self.notify(args);
 
 						$(".displayedDish").click(function(){
+							$('#selectDishView').hide();
+							$('#oneDishView').show();
+
 							//console.log("displayedDish click");
 							var id = $(this).attr('id');
 							//console.log(".displayedDish.click id: "+id);
@@ -233,24 +235,6 @@ var DinnerModel = function() {
 					{
 						alert("Problem receiving data");
 					}
-=======
-		            //console.log(dishes);
-
-		            var args = {type:"selectDish", content:dishes};
- 					//console.log(args);
-		            self.notify(args);
-
-	            	$(".displayedDish").click(function(){
-
-	            		$('#selectDishView').hide();
-						$('#oneDishView').show();
-						
-	            		//console.log("displayedDish click");
-						var id = $(this).attr('id');
-						//console.log(".displayedDish.click id: "+id);
-						self.setSelectedDishId(id);
-					});
->>>>>>> origin/master
 		        },
 
 				error: function(jqXHR, exception) { 
@@ -269,7 +253,7 @@ var DinnerModel = function() {
 					} else {
 						alert('Uncaught Error.n' + jqXHR.responseText);
 					} 
-					this.notify(" ");
+					//this.notify(" ");
 				} 
 		});
 

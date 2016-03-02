@@ -208,12 +208,17 @@ var DinnerModel = function() {
 		            self.notify(args);
 
 	            	$(".displayedDish").click(function(){
+
+	            		$('#selectDishView').hide();
+						$('#oneDishView').show();
+						
 	            		//console.log("displayedDish click");
 						var id = $(this).attr('id');
 						//console.log(".displayedDish.click id: "+id);
 						self.setSelectedDishId(id);
 					});
 		        },
+
 				error: function(jqXHR, exception) { 
                     if (jqXHR.status === 0) {
 						alert('Not connection. Verify Network.');
@@ -232,7 +237,6 @@ var DinnerModel = function() {
 					} 
 					this.notify(" ");
 				} 
-						
 		});
 
 		// return $(dishes).filter(function(index,dish) {

@@ -27,6 +27,7 @@
 .headersection{
 	/*width:100%; */
 	background-color: rgb(255,235,182);
+	padding-bottom: 1%;
 	border-bottom: 3px solid #999;
 }
 .textBox{

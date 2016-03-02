@@ -155,7 +155,18 @@ var DinnerModel = function() {
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
 		console.log("Dishes in menu by sak: "+ dishesInMenu);
-		dishesInMenu.push(this.getDish(id));
+		
+		var newDish = this.getDish(id);
+
+		for(key in dishesInMenu){
+			if(dishesInMenu[key].Category === newDish.Category){
+				dishesInMenu.splice(key, 1);
+			}else{
+				// do nothing
+			}
+		}
+
+		dishesInMenu.push(newDish);
 
 		this.notify("menu");
 	}
@@ -202,6 +213,7 @@ var DinnerModel = function() {
 				complete: function() { $("#loadingIcon").hide();},
 		        success: function (data) {
 		            dishes = data["Results"];
+<<<<<<< HEAD
 		            console.log("DISHES from api: "+dishes);
 					
 					if(dishes)
@@ -221,7 +233,26 @@ var DinnerModel = function() {
 					{
 						alert("Problem receiving data");
 					}
+=======
+		            //console.log(dishes);
+
+		            var args = {type:"selectDish", content:dishes};
+ 					//console.log(args);
+		            self.notify(args);
+
+	            	$(".displayedDish").click(function(){
+
+	            		$('#selectDishView').hide();
+						$('#oneDishView').show();
+						
+	            		//console.log("displayedDish click");
+						var id = $(this).attr('id');
+						//console.log(".displayedDish.click id: "+id);
+						self.setSelectedDishId(id);
+					});
+>>>>>>> origin/master
 		        },
+
 				error: function(jqXHR, exception) { 
                     if (jqXHR.status === 0) {
 						alert('Not connection. Verify Network.');
@@ -240,7 +271,6 @@ var DinnerModel = function() {
 					} 
 					this.notify(" ");
 				} 
-						
 		});
 
 		// return $(dishes).filter(function(index,dish) {

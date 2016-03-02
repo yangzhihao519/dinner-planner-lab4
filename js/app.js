@@ -1,8 +1,17 @@
+$body = $("body");
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+     ajaxStop: function() { $body.removeClass("loading"); }    
+});
+
 $(function() {
 	//We initialise our model
 	var model = new DinnerModel();
 
 	//And create the needed controllers and views
+	var landingPageView = new LandingPageView($("#landingPage"), model);
+	var landingPageController = new LandingPageController(landingPageView, model);
+
 	var myDinnerView = new MyDinnerView($('#myDinnerView'), model);
 	var myDinnerController = new MyDinnerController(myDinnerView, model);
 
@@ -12,8 +21,9 @@ $(function() {
 	var oneDishView = new OneDishView($("#oneDishView"), model);
 	var oneDishController = new OneDishController(oneDishView, model);
 
-	var prepareDishView = new PrepareDishView($("#prepareDishView"),model);
 	var dinnerOverviewView = new DinnerOverviewView($('#dinnerOverviewView'), model);
+	var dinnerOverviewController = new DinnerOverviewController(dinnerOverviewView, model);
 
-	model.getAllDishes("appetizer");
+	var prepareDishView = new PrepareDishView($("#prepareDishView"),model);
+	var prepareDishController = new PrepareDishController(prepareDishView, model);
 });

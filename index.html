@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dinner planner</title>
 
+    <!-- JQuery & Javascript -->
     <script src="js/jquery.1.11.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	
@@ -14,8 +15,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
-  </head>
-  <body>
+    </head>
+    <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="headersection col-md-12">
@@ -27,13 +28,13 @@
 						<h1>HOMELETTE <small style="color: darkgoldenrod;">  From the best chefs in the world directly into your kitchen</small></h1> 
 					</div>
 					<div id="landingDiv">
-						<div class="textBox">
+						<div class="textBox" id="landingPage">
 							<h3>A Home Dinner Service</h3>
 							<hr/>
 							<p>some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here, some text here</p>
 							<br/><br/>
 							<p>start quickly</p>
-							<button type="button" class="btn btn-primary btn-md" onclick="DinnerMenu()"> Create new dinner</button>
+							<button type="button" class="btn btn-primary btn-md" id="createDinnerButton"> Create new dinner</button>
 						</div>
 					</div>
 				</div>  
@@ -155,7 +156,7 @@
 									<div class="col-xs-12" id="oneDishDescription"></div>
 								</div>
 							</div>
-							<button type="button" class="btn btn-primary" id="backToSelectDishButton" onclick="selectDish()">Back to select dish</button>
+							<button type="button" class="btn btn-primary" id="backToSelectDishButton">Back to select dish</button>
 						</div>
 					</div>
 
@@ -169,7 +170,7 @@
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<hr/>
 							<div class="col-md-4 col-sm-4 col-xs-4">
-								<button type="button" class="btn btn-default" id="confirmDishButton" onclick="selectDish()">Confirm dish</button>
+								<button type="button" class="btn btn-default" id="confirmDishButton">Confirm dish</button>
 							</div>
 							<div class="col-md-1 col-md-offset-5 col-sm-1 col-sm-offset-4 col-xs-1 col-xs-offset-4">
 								<b>SEK </b>
@@ -193,7 +194,7 @@
 								<p class="lead">Dinner: <span id="dinnerOverviewViewNumberOfGuests"></span><span> People</span></p>
 							</div>
 							<div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-5">
-								<button type="button" class="btn btn-primary" onclick="selectDish()">Edit Dinner</button>
+								<button type="button" class="btn btn-primary" id="backToEditDinnerView5Button">Edit Dinner</button>
 							</div>
 						</div>
 					</div>
@@ -214,7 +215,7 @@
 						<b>Total: <span id="dinnerOverviewViewTotalPrice"></span> SEK </b>
 					</div>
 					<div class="col-md-2 col-sm-2 col-xs-4">
-						<button type="button" class="btn btn-success" onclick="fullRecipe()">Print Full Recipe</button>
+						<button type="button" class="btn btn-success" id="printFullRecipeButton">Print Full Recipe</button>
 					</div>
 				</div>
 			</div>
@@ -231,7 +232,7 @@
 								<p class="lead">My Dinner: <span id="numberOfPeople"></span><span> People</span></p>
 							</div>
 							<div class="col-md-2 col-md-offset-6 col-sm-2 col-sm-offset-6 col-xs-5">
-								<button type="button" class="btn btn-primary pull-right" onclick="selectDish()">Edit Dinner</button>
+								<button type="button" class="btn btn-primary pull-right"  id="backToEditDinnerView6Button" >Edit Dinner</button>
 							</div>
 						</div>
 					</div>
@@ -248,75 +249,30 @@
 				</div>
 			</div> 
 			
-<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-		    
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->    
 		</div>  <!-- end of row -->
 	</div>	<!-- end of container -->
+
+    <!-- Loading icon -->
 	<div id="loadingIcon" class="modal">
-	
 	</div>
-	
-	<script>
-		
-	
-	$body = $("body");
-		$(document).on({
-    ajaxStart: function() { $body.addClass("loading");    },
-     ajaxStop: function() { $body.removeClass("loading"); }    
-});
-		function DinnerMenu()    // view1 to view2+3
-		{
-			$('#landing').hide();
-			$('#myDinnerView').show();
-			$('#selectDishView').show();
-		}
-		
-		function selectedDishDetails()   // view2+3 to view4
-		{
-			$('#selectDishView').hide();
-			$('#oneDishView').show();
-		}
-
-		function selectDish()    // view 4 to view 2+3
-		{
-			$('#oneDishView').hide();
-			$('#dinnerOverviewView').hide();
-			$('#prepareDishView').hide();
-			$('#myDinnerView').show();
-			$('#selectDishView').show();	
-		}
-
-		function confirmDinner()   // view2+3/4 to view5
-		{
-			$('#myDinnerView').hide();
-			$('#selectDishView').hide();
-			$('#oneDishView').hide();
-			$('#dinnerOverviewView').show();
-		}
-		
-		function fullRecipe()    // view5 to view6
-		{
-			$('#dinnerOverviewView').hide();
-			$('#prepareDishView').show();
-		}			
-	</script>
-
-    <!-- jQuery -->
-   <!-- <script src="https://code.jquery.com/jquery.js"></script> -->
-    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
-    <!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script> -->
 
 	<!-- The application JavaScript code -->
 	<script src="js/app.js"></script>
 	<script src="js/model/dinnerModel.js"></script>
+	<script src="js/view/landingPageView.js"></script>
 	<script src="js/view/myDinnerView.js"></script>
 	<script src="js/view/selectDishView.js"></script>
     <script src="js/view/oneDishView.js"></script>
-    <script src="js/view/prepareDishView.js"></script>
 	<script src="js/view/dinnerOverviewView.js"></script>
+	<script src="js/view/prepareDishView.js"></script>
+	<script src="js/controller/landingPageController.js"></script>
 	<script src="js/controller/myDinnerController.js"></script>	
 	<script src="js/controller/myDinnerController.js"></script>
 	<script src="js/controller/selectDishController.js"></script>
 	<script src="js/controller/oneDishController.js"></script>
+	<script src="js/controller/dinnerOverviewController.js"></script>
+	<script src="js/controller/prepareDishController.js"></script>
+
   </body>
 </html>

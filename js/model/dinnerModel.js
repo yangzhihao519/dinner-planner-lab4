@@ -45,7 +45,7 @@ var DinnerModel = function() {
 
     
     this.setSelectedDishId = function(id){
-    	console.log("this.setSelectedDishId");
+    	//console.log("this.setSelectedDishId");
     	selectedDishId = id;
     	this.notify("selectedDishId");
     }
@@ -118,7 +118,7 @@ var DinnerModel = function() {
 		var dishTotalPrice = 100 * numberOfGuests; 
 
 		//var dish = this.getDish(id);
-		console.log("dish: "+dish);
+		//console.log("dish: "+dish);
 
 		if(dish.hasOwnProperty('Ingredients')){
 			var allIngredients = dish.Ingredients;
@@ -137,7 +137,7 @@ var DinnerModel = function() {
 	this.getTotalMenuPrice = function() {
 		//TODO Lab 2
 		var totalMenuPrice = 0;
-		console.log("this.getTotalMenuPrice menu: "+ dishesInMenu);
+		//console.log("this.getTotalMenuPrice menu: "+ dishesInMenu);
 
 		for(key in dishesInMenu){
 			var dish = dishesInMenu[key];
@@ -146,7 +146,7 @@ var DinnerModel = function() {
 			totalMenuPrice += thisDishPrice;
 		}
 
-		console.log("totalMenuPrice: "+ totalMenuPrice);
+		//console.log("totalMenuPrice: "+ totalMenuPrice);
 		return totalMenuPrice;	
 	}
 
@@ -154,7 +154,19 @@ var DinnerModel = function() {
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
-		dishesInMenu.push(this.getDish(id));
+		console.log("Dishes in menu by sak: "+ dishesInMenu);
+		
+		var newDish = this.getDish(id);
+
+		for(key in dishesInMenu){
+			if(dishesInMenu[key].Category === newDish.Category){
+				dishesInMenu.splice(key, 1);
+			}else{
+				// do nothing
+			}
+		}
+
+		dishesInMenu.push(newDish);
 
 		this.notify("menu");
 	}
@@ -201,6 +213,27 @@ var DinnerModel = function() {
 				complete: function() { $("#loadingIcon").hide();},
 		        success: function (data) {
 		            dishes = data["Results"];
+<<<<<<< HEAD
+		            console.log("DISHES from api: "+dishes);
+					
+					if(dishes)
+					{
+						var args = {type:"selectDish", content:dishes};
+						//console.log(args);
+						self.notify(args);
+
+						$(".displayedDish").click(function(){
+							//console.log("displayedDish click");
+							var id = $(this).attr('id');
+							//console.log(".displayedDish.click id: "+id);
+							self.setSelectedDishId(id);
+						});
+					}
+					else 
+					{
+						alert("Problem receiving data");
+					}
+=======
 		            //console.log(dishes);
 
 		            var args = {type:"selectDish", content:dishes};
@@ -208,12 +241,18 @@ var DinnerModel = function() {
 		            self.notify(args);
 
 	            	$(".displayedDish").click(function(){
+
+	            		$('#selectDishView').hide();
+						$('#oneDishView').show();
+						
 	            		//console.log("displayedDish click");
 						var id = $(this).attr('id');
 						//console.log(".displayedDish.click id: "+id);
 						self.setSelectedDishId(id);
 					});
+>>>>>>> origin/master
 		        },
+
 				error: function(jqXHR, exception) { 
                     if (jqXHR.status === 0) {
 						alert('Not connection. Verify Network.');
@@ -232,7 +271,6 @@ var DinnerModel = function() {
 					} 
 					this.notify(" ");
 				} 
-						
 		});
 
 		// return $(dishes).filter(function(index,dish) {

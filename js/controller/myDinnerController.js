@@ -19,5 +19,11 @@ var MyDinnerController = function (view, model) {
 
 	$("#confirmDinnerButton").on('click', function(){
 		model.setSelectedDishId("");
+
+		// view 2+3/4 -> view 5
+		$('#myDinnerView').hide();
+		$('#selectDishView').hide();
+		$('#oneDishView').hide();
+		$('#dinnerOverviewView').show();
 	});
 }

@@ -45,7 +45,7 @@ var DinnerModel = function() {
 
     
     this.setSelectedDishId = function(id){
-    	console.log("this.setSelectedDishId");
+    	//console.log("this.setSelectedDishId");
     	selectedDishId = id;
     	this.notify("selectedDishId");
     }
@@ -118,7 +118,7 @@ var DinnerModel = function() {
 		var dishTotalPrice = 100 * numberOfGuests; 
 
 		//var dish = this.getDish(id);
-		console.log("dish: "+dish);
+		//console.log("dish: "+dish);
 
 		if(dish.hasOwnProperty('Ingredients')){
 			var allIngredients = dish.Ingredients;
@@ -137,7 +137,7 @@ var DinnerModel = function() {
 	this.getTotalMenuPrice = function() {
 		//TODO Lab 2
 		var totalMenuPrice = 0;
-		console.log("this.getTotalMenuPrice menu: "+ dishesInMenu);
+		//console.log("this.getTotalMenuPrice menu: "+ dishesInMenu);
 
 		for(key in dishesInMenu){
 			var dish = dishesInMenu[key];
@@ -146,7 +146,7 @@ var DinnerModel = function() {
 			totalMenuPrice += thisDishPrice;
 		}
 
-		console.log("totalMenuPrice: "+ totalMenuPrice);
+		//console.log("totalMenuPrice: "+ totalMenuPrice);
 		return totalMenuPrice;	
 	}
 
@@ -154,6 +154,7 @@ var DinnerModel = function() {
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
+		console.log("Dishes in menu by sak: "+ dishesInMenu);
 		dishesInMenu.push(this.getDish(id));
 
 		this.notify("menu");
@@ -201,18 +202,25 @@ var DinnerModel = function() {
 				complete: function() { $("#loadingIcon").hide();},
 		        success: function (data) {
 		            dishes = data["Results"];
-		            //console.log(dishes);
+		            console.log("DISHES from api: "+dishes);
+					
+					if(dishes)
+					{
+						var args = {type:"selectDish", content:dishes};
+						//console.log(args);
+						self.notify(args);
 
-		            var args = {type:"selectDish", content:dishes};
- 					//console.log(args);
-		            self.notify(args);
-
-	            	$(".displayedDish").click(function(){
-	            		//console.log("displayedDish click");
-						var id = $(this).attr('id');
-						//console.log(".displayedDish.click id: "+id);
-						self.setSelectedDishId(id);
-					});
+						$(".displayedDish").click(function(){
+							//console.log("displayedDish click");
+							var id = $(this).attr('id');
+							//console.log(".displayedDish.click id: "+id);
+							self.setSelectedDishId(id);
+						});
+					}
+					else 
+					{
+						alert("Problem receiving data");
+					}
 		        },
 				error: function(jqXHR, exception) { 
                     if (jqXHR.status === 0) {

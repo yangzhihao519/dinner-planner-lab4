@@ -155,7 +155,7 @@
 									<div class="col-xs-12" id="oneDishDescription"></div>
 								</div>
 							</div>
-							<button type="button" class="btn btn-primary" id="backToSelectDishButton" onclick="selectDish()">Back to select dish</button>
+							<button type="button" class="btn btn-primary" id="backToSelectDishButton">Back to select dish</button>
 						</div>
 					</div>
 
@@ -248,12 +248,12 @@
 				</div>
 			</div> 
 			
-<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
-		    
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ END OF VIEW 6 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->    
 		</div>  <!-- end of row -->
 	</div>	<!-- end of container -->
+
+    <!-- Loading icon -->
 	<div id="loadingIcon" class="modal">
-	
 	</div>
 	
 	<script>
@@ -264,15 +264,6 @@
 	    ajaxStart: function() { $body.addClass("loading");    },
 	     ajaxStop: function() { $body.removeClass("loading"); }    
 	});
-
-		function selectDish()    // view 4 to view 2+3
-		{
-			$('#oneDishView').hide();
-			$('#dinnerOverviewView').hide();
-			$('#prepareDishView').hide();
-			$('#myDinnerView').show();
-			$('#selectDishView').show();	
-		}
 
 		function confirmDinner()   // view2+3/4 to view5
 		{

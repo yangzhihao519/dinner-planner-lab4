@@ -10,5 +10,12 @@ var OneDishController = function (view, model) {
 
 	$("#backToSelectDishButton").on("click", function(){
 		model.setSelectedDishId("");
+
+		// view 2+4 -> view 2+3
+		$('#oneDishView').hide();
+		$('#dinnerOverviewView').hide();
+		$('#prepareDishView').hide();
+		$('#myDinnerView').show();
+		$('#selectDishView').show();	
 	});
 }

@@ -5,7 +5,14 @@ var OneDishController = function (view, model) {
 		console.log("selectedDishId: "+selectedDishId);
 
 		model.addDishToMenu(selectedDishId);
-		model.setSelectedDishId("");	
+		model.setSelectedDishId("");
+
+		// view 2+4/5/6 -> view 2+3
+		$('#oneDishView').hide();
+		$('#dinnerOverviewView').hide();
+		$('#prepareDishView').hide();
+		$('#myDinnerView').show();
+		$('#selectDishView').show();	
 	});
 
 	$("#backToSelectDishButton").on("click", function(){

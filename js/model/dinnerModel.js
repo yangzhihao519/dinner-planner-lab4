@@ -219,7 +219,8 @@ var DinnerModel = function() {
 					});
 		        },
 				error: function(e) { 
-                    alert("An Error occured: " + e.status + " "+ e.statusText);  
+                    // alert("An Error occured: " + e.status + " "+ e.statusText);  
+                    alert("Sorry, there is an error occured. Please check your internet connection.");
                 } 
 				
 		});
